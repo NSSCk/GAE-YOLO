@@ -6,7 +6,7 @@ The entire project document consists of four main parts, namely：
 * Jetson
 * PyQt-UI
 * ZED
-* 
+  
 ## GAE-YOLO
 The implementation of algorithm functions depends on GAE-YOLO, and you need to configure the YOLO environment according to the YOLO official website(https://docs.ultralytics.com/)
 
@@ -15,6 +15,8 @@ The implementation of algorithm functions depends on GAE-YOLO, and you need to c
 pip install ultralytics
 `
 * Download YOLOv11 source code (https://github.com/ultralytics/ultralytics/)
+  
+You can also configure pytorch and CUDA environments and directly use the code uploaded from this project
 ### Environment Configuration
 * Python3.6/3.7/3.8
 * Pytorch
@@ -35,11 +37,12 @@ pip install ultralytics
 
 ## Training methods
 * Ensure that the dataset is prepared in advance
-* To train using a single GPU or CPU:
+* Verify the effectiveness of the environment configuration
+ `python test-environment.py`
+* To train using a single GPU or mutli GPU:
 `
-detect train data=datasets/wheat/my data.yaml model=ultralytics/cfg/models/v8/yolov8s CBAM.yaml pretrained=False epochs=300 batch=16 lr0=0.01 resume=True #Need to modify according to one's own actual situation 
+train_GhostConv.py
 `
-
 
 * If you want to specify which GPU devices to use, you can add 'CUDA_VISIBLEDEVICES=0.3' before the instruction (for example, I only need to use the first and fourth GPU devices in the device)
 * `CUDA_VISIBLE_DEVICES=0,3 torchrun --nproc_per_node=2 train_multi_GPU.py`
