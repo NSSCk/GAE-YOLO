@@ -1,4 +1,4 @@
-# GAE-YOLO
+# GAE-YOLO Integrated System
 This is an edge device detection algorithm for tomato maturity detection and pest identification, involving Jetson TX2, binocular camera ZED, and YOLO object detection algorithm.The robustness of the code is continuously improving……
 
 The entire project document consists of four main parts, namely：
@@ -7,10 +7,15 @@ The entire project document consists of four main parts, namely：
 * PyQt-UI
 * ZED
 * 
-# GAE-YOLO
+## GAE-YOLO
 The implementation of algorithm functions depends on GAE-YOLO, and you need to configure the YOLO environment according to the YOLO official website(https://docs.ultralytics.com/)
 
-# Environment Configuration
+* Install the ultralytics library
+* `
+pip install ultralytics
+`
+* Download YOLOv11 source code (https://github.com/ultralytics/ultralytics/)
+### Environment Configuration
 * Python3.6/3.7/3.8
 * Pytorch
 * numpy
@@ -20,7 +25,7 @@ The implementation of algorithm functions depends on GAE-YOLO, and you need to c
 * It is best to use GPU training
 * Attention: Make appropriate modifications according to your environmental needs
   
-# Dataset download address：
+### Dataset download address：
 * The tomato detection dataset can be obtained in ( https://www.kaggle.com/datasets/andrewmvd/tomato-detection)
 * Of course, you can also continue to supplement other datasets for enrichment, as long as the format is the same (https://www.kaggle.com/search?q=tomato+detection+in%3Adatasets)
 * The tomato detection dataset can be obtained in (https://universe.roboflow.com/sylhet-agricultural-university/tomato-leaf-diseases-detect)
