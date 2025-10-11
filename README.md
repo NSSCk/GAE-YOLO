@@ -43,41 +43,50 @@ You can also configure pytorch and CUDA environments and directly use the code u
 `
 train_GhostConv.py
 `
-
 * If you want to specify which GPU devices to use, you can add 'CUDA_VISIBLEDEVICES=0.3' before the instruction (for example, I only need to use the first and fourth GPU devices in the device)
 * `CUDA_VISIBLE_DEVICES=0,3 torchrun --nproc_per_node=2 train_multi_GPU.py`
 
-## Precautions
-* When using training scripts, be sure to set '-- data path' to the root directory where you store the 'DRIVE' folder**
-* When using prediction scripts, set 'weights_path' to your own generated weight path.
+## ZED
+Establish 3D tracking using Zed
+* Firstly, you need to configure the driver environment of the ZED camera according to the ZED official website(Firstly, you need to configure the driver environment of the ZED camera according to the ZED official website)
+### Environment Configuration
+* os
+* platform
+* sys
+* re
+* requests
+* argparse
+* pathlib
+* subprocess
+* sys
+* math
+* shutil
+  
+* Track the video：
+*  `python Record_video.py`
+*  Obtain three-dimensional coordinates
+*  `python xyz-distance.py`
 
-## Load a model
-`
-from ultralytics import YOLO
-model = YOLO("path/to/best.pt")  # load a  model
-`
-## Validate the model
-`
-metrics = model.val()  # no arguments needed, dataset and settings remembered
-`
-## Tracking
-* Track the worm and save the video locally, please run track.py
-*  Attention: Appropriate modifications need to be made according to your local environment
-*  
-`
-python track.py
-`
-## behavior-analysis
-* To analyze the behavior of the worm, please run behavior-analysis.py
-* Attention: Appropriate modifications need to be made according to your local environment
-* 
-`
-python behavior-analysis.py
-`
-## complex-behavior-analysis
-* To analyze the  complex behavior of the worm, please run behavior-analysis.py
-* Attention: Appropriate modifications need to be made according to your local environment
-* 
-`
-python COmplex-behavior-analysis.py
-`
+## Jetson TX2
+JetsonTX2 as a edge computing device
+* Convert PC to TX2
+* `python PC2TX2.py`
+* Export to ONNNX format
+* `export-ONNX.py`
+
+## PyQt-GUI
+GUI software design
+### Environment Configuration
+* random
+* yaml
+* numpy
+* threading
+* pyzed
+* PyQt6
+  
+* Open the interface visualization program
+* `tomatoLoadUI.py`
+
+
+
+
