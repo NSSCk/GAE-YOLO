@@ -63,16 +63,16 @@ Establish 3D tracking using Zed
 * shutil
   
 * Track the video：
-*  `python Record_video.py`
+ `python Record_video.py`
 *  Obtain three-dimensional coordinates
-*  `python xyz-distance.py`
+ `python xyz-distance.py`
 
 ## Jetson TX2
 JetsonTX2 as a edge computing device
 * Convert PC to TX2
 * `python PC2TX2.py`
 * Export to ONNNX format
-* `export-ONNX.py`
+ ` python export-ONNX.py`
 
 ## PyQt-GUI
 GUI software design
@@ -85,7 +85,7 @@ GUI software design
 * PyQt6
   
 * Open the interface visualization program
-* `tomatoLoadUI.py`
+`python tomatoLoadUI.py`
 
 
 
