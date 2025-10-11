@@ -1,35 +1,33 @@
 import cv2
 import numpy as np
 
-
 def calculate_shape_features(roi):
     # 1.
     gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
     contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnt = max(contours, key=cv2.contourArea)
-
-    # 2.
-    aspect_ratio = float(roi.shape[1]) / roi.shape[0]
-
+    
+    # 2. 
+    aspect_ratio = float(roi.shape[1]) / roi.shape[0]  # 
+    
     area = cv2.contourArea(cnt)
     perimeter = cv2.arcLength(cnt, True)
     circularity = 4 * np.pi * area / (perimeter ** 2) if perimeter > 0 else 0
-
+    
     hull = cv2.convexHull(cnt)
     hull_area = cv2.contourArea(hull)
     roughness = (hull_area - area) / area if area > 0 else 0
-
-    # 3.
+    
+    # 3. 
     left_right_diff = calculate_symmetry(cnt)
-
+    
     return {
         'aspect_ratio': aspect_ratio,
         'circularity': circularity,
         'roughness': roughness,
         'symmetry': left_right_diff
     }
-
 
 def calculate_symmetry(contour):
     # 
@@ -46,17 +44,16 @@ def calculate_symmetry(contour):
     right_area = cv2.contourArea(right_mask)
     return 1 - abs(left_area - right_area) / (left_area + right_area)
 
-
 def judge_ripeness(shape_features):
     # 
     aspect_score = np.clip((1.2 - abs(shape_features['aspect_ratio'] - 1.1)) / 0.2, 0, 1)
     circ_score = np.clip((shape_features['circularity'] - 0.7) / 0.2, 0, 1)
     sym_score = np.clip((shape_features['symmetry'] - 0.8) / 0.2, 0, 1)
     rough_score = 1 - np.clip(shape_features['roughness'] / 0.2, 0, 1)
-
+    
     # 
-    total_score = 0.3 * aspect_score + 0.4 * circ_score + 0.2 * sym_score + 0.1 * rough_score
-
+    total_score = 0.3*aspect_score + 0.4*circ_score + 0.2*sym_score + 0.1*rough_score
+    
     if total_score > 0.7:
         return "mature"
     elif 0.4 <= total_score <= 0.7:
