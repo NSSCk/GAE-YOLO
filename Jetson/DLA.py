@@ -16,12 +16,12 @@ def inference(engine, input_data):
     cuda.memcpy_htod(inputs[0]["device"], input_data)
     # DLA
     context.execute_async_v2(bindings=bindings, stream_handle=stream.handle)
-
+    # CPU
     output_data = np.empty(outputs[0]["shape"], dtype=outputs[0]["dtype"])
     cuda.memcpy_dtoh(output_data, outputs[0]["device"])
     return output_data
 
-# CPU（NMS）
+# CPU后（NMS）
 def postprocess(output_data):
     boxes = output_data[..., :4]
     scores = output_data[..., 4]
@@ -31,5 +31,5 @@ def postprocess(output_data):
 
 image = cv2.imread("tomato.jpg")
 input_data = preprocess(image)          # CPU
-detections = inference(engine, input_data)  # GPU/DLA推
+detections = inference(engine, input_data)  # GPU/DLA
 results = postprocess(detections)       # CPU
