@@ -1,1 +1,0 @@
-sudo tegrastats --interval 1000 --logfile memory_log.txt
